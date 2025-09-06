@@ -1,0 +1,45 @@
+# Template Extension Pipeline Example
+# This demonstrates a complete pipeline using template extension components
+
+extensions:
+  - template_extension
+
+pipeline:
+  nodes:
+    # Data Sources
+    - processor: StringDataSource
+      parameters:
+        value: "Hello Template Extension"
+
+    # Context Processing - Add input string to context
+    - processor: EchoContextProcessor
+      parameters:
+        message: "Pipeline started"
+
+    # Add metadata
+    - processor: MetadataContextProcessor
+      parameters:
+        include_timestamp: true
+        include_stats: true
+        custom_metadata:
+          pipeline_name: "template_extension_demo"
+          version: "1.0.0"
+
+    # Data Operations on original string
+    - processor: StringUppercaseOperation
+
+    - processor: StringConcatenateOperation
+      parameters:
+        suffix: " - Processed!"
+
+    # Analysis probes
+    - processor: StringAnalysisProbe
+      context_key: "analysis_results"
+
+    - processor: StringLengthProbe
+      context_key: "string_length"
+
+    # File output
+    - processor: StringFileSink
+      parameters:
+        file_path: "output/template_result.txt"

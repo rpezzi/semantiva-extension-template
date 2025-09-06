@@ -1,0 +1,21 @@
+[project]
+name = "semantiva-extension-template"
+version = "0.1.0"
+description = "A template for creating extensions for Semantiva."
+readme = "README.md"
+requires-python = ">=3.10.12"
+license = "Apache-2.0"
+dependencies = ["semantiva>=0.5.0"]
+
+[project.entry-points."semantiva.extensions"]
+template_extension = "template_extension:TemplateExtension"
+
+[tool.setuptools]
+packages = ["template_extension"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+
+[build-system]
+requires = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.build_meta"
