@@ -2,7 +2,7 @@
 # This demonstrates a complete pipeline using template extension components
 
 extensions:
-  - template_extension
+  - template-extension
 
 pipeline:
   nodes:

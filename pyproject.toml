@@ -8,7 +8,7 @@ license = "Apache-2.0"
 dependencies = ["semantiva>=0.5.0"]
 
 [project.entry-points."semantiva.extensions"]
-template_extension = "template_extension:TemplateExtension"
+template-extension = "template_extension:TemplateExtension"
 
 [tool.setuptools]
 packages = ["template_extension"]

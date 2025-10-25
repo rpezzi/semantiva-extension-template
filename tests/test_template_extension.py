@@ -142,7 +142,7 @@ def test_extension_registration():
     """Test that the extension can be registered and discovered."""
 
     from template_extension import TemplateExtension
-    from semantiva.registry.class_registry import ClassRegistry
+    from semantiva.registry.processor_registry import ProcessorRegistry
 
     # Create extension instance
     extension = TemplateExtension()
@@ -150,15 +150,15 @@ def test_extension_registration():
     # Test that register method exists and can be called
     extension.register()  # Should not raise any exceptions
 
-    # Test that some components are now available through ClassRegistry
+    # Test that some components are now available through ProcessorRegistry
     # Note: This test verifies the registration pattern works
-    registered_modules = ClassRegistry.get_registered_modules()
+    registered_modules = ProcessorRegistry.registered_modules()
     expected_modules = [
-        "template_extension.data_types",
-        "template_extension.operations",
-        "template_extension.probes",
-        "template_extension.data_io",
-        "template_extension.context_processors",
+        "template_extension.data_types.data_types",
+        "template_extension.operations.operations",
+        "template_extension.probes.probes",
+        "template_extension.data_io.data_io",
+        "template_extension.context_processors.processors",
     ]
 
     for module in expected_modules:

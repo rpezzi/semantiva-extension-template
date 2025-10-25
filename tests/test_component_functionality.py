@@ -215,7 +215,7 @@ class TestContextProcessorsViaPipeline:
     def test_echo_context_processor_pipeline(self):
         """EchoContextProcessor adds echo metadata via pipeline."""
         pipeline_yaml = """
-        extensions: ["template_extension"]
+        extensions: ["template-extension"]
         pipeline:
           nodes:
             - processor: EchoContextProcessor
@@ -250,7 +250,7 @@ class TestContextProcessorsViaPipeline:
     def test_string_context_processor_pipeline(self):
         """Test a simple pipeline with context processor metadata."""
         pipeline_yaml = """
-        extensions: ["template_extension"]
+        extensions: ["template-extension"]
         pipeline:
           nodes:
             - processor: MetadataContextProcessor
@@ -287,7 +287,7 @@ class TestContextProcessorsViaPipeline:
     def test_metadata_context_processor_pipeline(self):
         """MetadataContextProcessor adds execution metadata via pipeline."""
         pipeline_yaml = """
-        extensions: ["template_extension"]
+        extensions: ["template-extension"]
         pipeline:
           nodes:
             - processor: MetadataContextProcessor
@@ -343,7 +343,7 @@ class TestComponentIntegration:
             output_path = f.name
 
         pipeline_yaml = f"""
-        extensions: ["template_extension"]
+        extensions: ["template-extension"]
         pipeline:
           nodes:
             - processor: EchoContextProcessor
@@ -354,7 +354,7 @@ class TestComponentIntegration:
                 file_path: "{input_path}"
             - processor: StringUppercaseOperation
             - processor: StringLengthProbe
-              context_keyword: "probes.length_result"
+              context_key: "probes.length_result"
             - processor: StringFileSink
               parameters:
                 file_path: "{output_path}"

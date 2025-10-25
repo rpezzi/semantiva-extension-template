@@ -33,7 +33,7 @@ name = "semantiva-my-extension"
 description = "My domain-specific extension for Semantiva"
 
 [project.entry-points."semantiva.extensions"]
-my_extension = "my_extension"
+my_extension = "my_extension:MyExtension"
 ```
 
 ### 3. Define Your Domain Components
@@ -51,21 +51,24 @@ This template includes exemplar implementations of all Semantiva component types
 Update `__init__.py` to register your new modules:
 
 ```python
+from semantiva.registry import SemantivaExtension
+from semantiva.registry.processor_registry import ProcessorRegistry
+
 class MyExtension(SemantivaExtension):
     def register(self) -> None:
-        """Register all extension modules with the ClassRegistry.
+        """Register all extension modules with the ProcessorRegistry.
         
-        The ClassRegistry.register_modules() method automatically imports each module,
+        The ProcessorRegistry.register_modules() method automatically imports each module,
         which triggers component registration via the SemantivaComponent metaclass.
         This ensures components are available for both pipeline resolution and
         doctor discovery.
         """
-        ClassRegistry.register_modules([
-            "my_extension.data_types",
-            "my_extension.operations", 
-            "my_extension.probes",
-            "my_extension.data_io",
-            "my_extension.processors",
+        ProcessorRegistry.register_modules([
+            "my_extension.data_types.data_types",
+            "my_extension.operations.operations", 
+            "my_extension.probes.probes",
+            "my_extension.data_io.data_io",
+            "my_extension.context_processors.processors",
         ])
 ```
 
@@ -97,21 +100,11 @@ my_extension/
 
 - **Complete scaffolding**: Examples of all Semantiva component types
 - **Entry point registration**: Automatic discovery via `semantiva.extensions`
-- **Integrated design**: Extension class and registration in single `__init__.py` 
 - **Pipeline YAML example**: Demonstrates end-to-end usage
 - **Comprehensive tests**: Unit tests and integration pipeline test
 - **Clean architecture**: Follows Semantiva best practices
 - **Domain neutrality**: Template avoids domain-specific terminology
 
-## Benefits of Integrated Design
-
-By moving the `SemantivaExtension` class into `__init__.py`, this template provides:
-
-1. **Simpler structure**: One less file to maintain and understand
-2. **Cleaner imports**: Extension class available directly from package root
-3. **Better encapsulation**: Extension logic co-located with package definition
-4. **Easier adaptation**: Fewer files to modify when creating your own extension
-5. **Modern practices**: Follows current Python packaging conventions
 
 ## Development Workflow
 
